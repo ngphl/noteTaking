@@ -14,7 +14,7 @@ exports.register = async (req, res) => {
     });
     res.status(201).json({ message: 'User registered successfully' }); // Respond with success message
   } catch (error) {
-    res.status(500).json({ error: error.message }); // Handle any errors
+    res.status(500).json({ error: error.message, message: "Duplicated user" }); // Handle any errors
   }
 };
 
@@ -30,28 +30,21 @@ exports.login = async (req, res) => {
     const token = jwt.sign({ id: user.id }, process.env.JWT_SECRET, {
       expiresIn: '1h',
     }); // Generate JWT
-    res.json({ token }); // Respond with JWT
+    res.json({ message: "Login successful", token }); // Respond with JWT
   } catch (error) {
-    res.status(500).json({ error: error.message }); // Handle any errors
+    res.status(500).json({ error: error.message, message: "Login failed"}); // Handle any errors
   }
 };
 
-// Example protected route
 exports.getUser = async (req, res) => {
   try {
     const user = await db('users').where({ id: req.user.id }).first(); // Find user by ID
+    if (!user) {
+      return res.status(404).json({ message: 'User not found' }); // If user is not found, respond with 404
+    }
     res.json(user); // Respond with user data
   } catch (error) {
     res.status(500).json({ error: error.message }); // Handle any errors
   }
 };
 
-// Example protected route
-exports.getUser = async (req, res) => {
-  try {
-    const user = await db('users').where({ id: req.user.id }).first(); // Find user by ID
-    res.json(user); // Respond with user data
-  } catch (error) {
-    res.status(500).json({ error: error.message }); // Handle any errors
-  }
-};
