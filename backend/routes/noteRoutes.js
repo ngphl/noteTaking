@@ -10,6 +10,9 @@ router.post("/", authMiddleware, noteController.createNote);
 // Get all notes
 router.get("/", authMiddleware, noteController.getNotes);
 
+// Get a note
+router.get("/:id", authMiddleware, noteController.getNote);
+
 // Update a note
 router.put("/:id", authMiddleware, noteController.updateNote);
 

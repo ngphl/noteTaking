@@ -18,7 +18,6 @@ exports.createNote = async (req, res) => {
 // Get all notes for the authenticated user
 exports.getNotes = async (req, res) => {
   const userId = req.user.id;
-
   try {
     const notes = await db("notes").where({ user_id: userId });
     res.json(notes);
@@ -26,6 +25,23 @@ exports.getNotes = async (req, res) => {
     res.status(500).json({ error: error.message });
   }
 };
+
+//Get a specific note for the authenticated user
+exports.getNote = async (req,res) => {
+  const {id} = req.params;
+  const userId = req.user.id;
+
+  try {
+    const note = await db("notes").where({id, user_id:userId}).first();
+    if (!note) {
+      return res.status(404).json({message: "Note not found"});
+    }
+    res.json(note)
+  }
+  catch(error) {
+    res.status(500).json({error: error.message})
+  }
+}
 
 // Update a note
 exports.updateNote = async (req, res) => {
