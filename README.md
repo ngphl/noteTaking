@@ -23,7 +23,6 @@ The application is divided into two main parts:
         - `routes`: Defines the API routes.
         - `config`: Contains database configuration.
         - `migrations`: Database migration files.
-        - `seeds`: Seed files to populate the database with initial data.
         - `.env`: Environment variables for sensitive information (ignored by git).
     
 2. **Frontend**: Provides a user interface for interacting with the application.
