@@ -135,4 +135,5 @@ The codebase is well-documented with comments explaining the functionality of di
 
 ---
 
-For any additional details or questions, feel free to reach out via the project's [GitHub repository](https://github.com/your-repo).
+For any additional details or questions, feel free to reach out via the project's [GitHub repository](https://github.com/your-repo). 
+Or simply send me an email at longsworkspace@gmail.com
