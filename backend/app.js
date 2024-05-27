@@ -8,12 +8,9 @@ const swaggerUI = require("swagger-ui-express");
 const swaggerDocument = require("./docs/openapi.json");
 
 
-const userRoutes = require("./routes/userRoutes");
+const userRoutes = require("./routes/userRoutes"); //Import user routes
 const noteRoutes = require("./routes/noteRoutes"); // Import note routes
 
-
-var indexRouter = require("./routes/index");
-var usersRouter = require("./routes/users");
 
 var app = express();
 
@@ -35,9 +32,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/api/users", userRoutes);
 app.use("/api/notes", noteRoutes); // Use note routes
 app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument)); //Swagger
-
-app.use("/", indexRouter);
-app.use("/users", usersRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
