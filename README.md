@@ -92,8 +92,7 @@ The application is divided into two main parts:
 
 3. Start the React Native application:
     ```sh
-    npx react-native run-android # For Android
-    npx react-native run-ios     # For iOS
+    npx expo start
     ```
 
 ## How to Contribute
