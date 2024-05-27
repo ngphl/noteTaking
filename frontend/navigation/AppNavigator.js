@@ -2,6 +2,7 @@ import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { createStackNavigator } from "@react-navigation/stack";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+// Import the screens
 import SplashScreen from "../src/screens/SplashScreen";
 import LoginScreen from "../src/screens/LoginScreen";
 import RegisterScreen from "../src/screens/RegisterScreen";
@@ -13,17 +14,19 @@ import AboutScreen from "../src/screens/AboutScreen";
 import UserScreen from "../src/screens/UserScreen";
 import ConfigScreen from "../src/screens/ConfigScreen";
 import { ThemeProvider, useTheme } from "../src/components/theme";
-import { GlobalStyles } from "../src/components/style";
 import { FontAwesome5 } from "@expo/vector-icons";
 
+//Create navigator
 const Stack = createStackNavigator();
 const Tab = createBottomTabNavigator();
 
+//Main screen hold Tab Navigator
 function Main() {
+  //Check darkmode
   const { darkMode } = useTheme();
-
   return (
     <Tab.Navigator
+    //Adjust icon and color
       screenOptions={({ route }) => ({
         tabBarIcon: ({ color, size }) => {
           let iconName;
@@ -34,6 +37,7 @@ function Main() {
           }
           return <FontAwesome5 name={iconName} size={size} color={color} />;
         },
+        //Dark mode color scheme
         tabBarActiveTintColor: darkMode ? "#a688fa" : "#5e43f3", // Active icon color
         tabBarInactiveTintColor: darkMode ? "#888" : "#888", // Inactive icon color
         tabBarStyle: {
@@ -41,11 +45,13 @@ function Main() {
         },
       })}
     >
+      {/* Home Screen */}
       <Tab.Screen
         name="Home"
         component={HomeScreen}
         options={{ headerShown: false }}
       />
+      {/* Setting Screen */}
       <Tab.Screen
         name="Settings"
         component={SettingScreen}
@@ -55,10 +61,13 @@ function Main() {
   );
 }
 
+//Root navigator for all screens
 function RootNavigator() {
+  //Check darkmode
   const { darkMode } = useTheme();
 
   return (
+    //Splash screen when application launch
     <Stack.Navigator
       initialRouteName="Splash"
       screenOptions={{
@@ -101,6 +110,7 @@ function RootNavigator() {
   );
 }
 
+//App Navigator 
 const AppNavigator = () => {
   return (
     <ThemeProvider>

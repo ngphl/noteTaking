@@ -3,10 +3,12 @@ import { View, Text, StyleSheet } from "react-native";
 import { getToken, SERVER_URL } from "../service/AuthService";
 import { GlobalStyles } from "../components/style";
 
+//User screen
 const UserScreen = ({ navigation }) => {
   const [user, setUser] = useState({});
   const globalStyles = GlobalStyles();
 
+  //Fetch user information
   useEffect(() => {
     const fetchUser = async () => {
       try {
@@ -19,7 +21,6 @@ const UserScreen = ({ navigation }) => {
         if (!response.ok) {
           throw new Error("Failed to retrieve user");
         }
-
         const data = await response.json();
         // Exclude password and format dates
         const formattedData = {
@@ -36,6 +37,7 @@ const UserScreen = ({ navigation }) => {
     fetchUser();
   }, []);
 
+  //Format date
   const formatDate = (dateString) => {
     const date = new Date(dateString);
     const day = String(date.getDate()).padStart(2, "0");
@@ -47,13 +49,17 @@ const UserScreen = ({ navigation }) => {
   return (
     <View style={[styles.container, globalStyles.background]}>
       <Text style={[globalStyles.title, styles.title]}>Information</Text>
+      {/*Display username*/}
       <Text style={globalStyles.label}>Username: {user.username}</Text>
+      {/*Display date created*/}
       <Text style={globalStyles.label}>Created At: {user.created_at}</Text>
+      {/*Display date updated*/}
       <Text style={globalStyles.label}>Updated At: {user.updated_at}</Text>
     </View>
   );
 };
 
+//Local styles
 const styles = StyleSheet.create({
   container: {
     flex: 1,

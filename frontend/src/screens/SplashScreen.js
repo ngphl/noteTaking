@@ -8,6 +8,7 @@ import {
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import { GlobalStyles } from "../components/style";
 
+//Splash screen
 const SplashScreen = ({ navigation }) => {
   const globalStyles = GlobalStyles();
   useEffect(() => {
@@ -23,10 +24,12 @@ const SplashScreen = ({ navigation }) => {
 
   return (
     <View style={[styles.container, globalStyles.background]}>
+      {/*Introduction text because I don't have logo*/}
       <Text style={[styles.appName, globalStyles.appName]}>Note Taking</Text>
       <Text style={[styles.subHeading, globalStyles.subHeading]}>
         Made by Long Nguyen
       </Text>
+      {/*Login button*/}
       <View style={styles.buttonsContainer}>
         <TouchableOpacity
           style={styles.button}
@@ -34,6 +37,7 @@ const SplashScreen = ({ navigation }) => {
         >
           <Text style={styles.buttonText}>Login</Text>
         </TouchableOpacity>
+        {/*Create an account button*/}
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("Register")}

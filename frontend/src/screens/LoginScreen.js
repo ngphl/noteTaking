@@ -11,12 +11,14 @@ import { login } from "../service/AuthService";
 import { useTheme } from "../components/theme";
 import { GlobalStyles } from "../components/style";
 
+//Login screen
 const LoginScreen = ({ navigation }) => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const globalStyles = GlobalStyles();
   const { darkMode } = useTheme();
 
+  //Handle Login functionalities
   const handleLogin = async () => {
     try {
       const data = await login(username, password);
@@ -26,10 +28,12 @@ const LoginScreen = ({ navigation }) => {
     }
   };
 
+  //Darkmode color
   const placeholderColor = darkMode ? "#bbb" : "#888";
 
   return (
     <View style={[styles.container, globalStyles.background]}>
+      {/*Username input*/}
       <Text style={globalStyles.label}>Username</Text>
       <TextInput
         style={[globalStyles.input, globalStyles.content]}
@@ -38,6 +42,7 @@ const LoginScreen = ({ navigation }) => {
         placeholder="Enter username"
         placeholderTextColor={placeholderColor}
       />
+      {/*Password input*/}
       <Text style={globalStyles.label}>Password</Text>
       <TextInput
         style={[globalStyles.input, globalStyles.content]}
@@ -47,6 +52,7 @@ const LoginScreen = ({ navigation }) => {
         placeholderTextColor={placeholderColor}
         secureTextEntry={true}
       />
+      {/*Login button*/}
       <View style={styles.buttonsContainer}>
         <TouchableOpacity style={styles.button} onPress={handleLogin}>
           <Text style={styles.buttonText}>Login</Text>
@@ -56,6 +62,7 @@ const LoginScreen = ({ navigation }) => {
   );
 };
 
+//Local style
 const styles = StyleSheet.create({
   container: {
     flex: 1,

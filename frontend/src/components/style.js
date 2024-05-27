@@ -1,6 +1,7 @@
 import { StyleSheet } from "react-native";
 import { useTheme } from "./theme";
 
+//Global style to use for all screens
 export function GlobalStyles() {
   const { isLargeText } = useTheme();
   const { darkMode } = useTheme();

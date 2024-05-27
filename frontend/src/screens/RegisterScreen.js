@@ -11,12 +11,14 @@ import { register } from "../service/AuthService";
 import { GlobalStyles } from "../components/style";
 import { useTheme } from "../components/theme";
 
+//Register account screen
 const RegisterScreen = ({ navigation }) => {
   const [username, setUserName] = useState("");
   const [password, setPassword] = useState("");
   const globalStyles = GlobalStyles();
   const { darkMode } = useTheme();
 
+  //Handle register functionalities
   const handleRegister = async () => {
     if (!username || !password) {
       Alert.alert(
@@ -25,7 +27,6 @@ const RegisterScreen = ({ navigation }) => {
       );
       return;
     }
-
     try {
       const data = await register(username, password);
       Alert.alert("Success", "Registration Successful");
@@ -35,10 +36,12 @@ const RegisterScreen = ({ navigation }) => {
     }
   };
 
+  //Darkmode color
   const placeholderColor = darkMode ? "#bbb" : "#888";
 
   return (
     <View style={[styles.container, globalStyles.background]}>
+      {/*Username input*/}
       <Text style={globalStyles.label}>Username</Text>
       <TextInput
         style={[globalStyles.input, globalStyles.content]}
@@ -47,6 +50,7 @@ const RegisterScreen = ({ navigation }) => {
         placeholder="Enter username"
         placeholderTextColor={placeholderColor}
       />
+      {/*Password input*/}
       <Text style={globalStyles.label}>Password</Text>
       <TextInput
         style={[globalStyles.input, globalStyles.content]}
@@ -56,6 +60,7 @@ const RegisterScreen = ({ navigation }) => {
         placeholderTextColor={placeholderColor}
         secureTextEntry
       />
+      {/*Register button*/}
       <View style={styles.buttonsContainer}>
         <TouchableOpacity style={styles.button} onPress={handleRegister}>
           <Text style={styles.buttonText}>Register</Text>
@@ -65,6 +70,7 @@ const RegisterScreen = ({ navigation }) => {
   );
 };
 
+//Local style
 const styles = StyleSheet.create({
   container: {
     flex: 1,

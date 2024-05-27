@@ -3,6 +3,7 @@ import { SafeAreaView } from "react-native-safe-area-context";
 import { View, StyleSheet } from "react-native";
 import { GlobalStyles } from "./style";
 
+//Create a global layout
 export function GlobalLayout({ children }) {
   const globalStyles = GlobalStyles();
   return (

@@ -4,6 +4,7 @@ import licenses from "../../licenses.json";
 import { GlobalStyles } from "../components/style";
 import { GlobalLayout } from "../components/Layout";
 
+//About screen display general application information and licenses
 const AboutScreen = () => {
   const globalStyles = GlobalStyles();
 
@@ -16,12 +17,14 @@ const AboutScreen = () => {
       <ScrollView
         contentContainerStyle={[styles.scrollContainer, styles.backgroundColor]}
       >
+        {/*Display the information */}
         <Text style={[styles.title, globalStyles.title]}>About</Text>
         <Text style={[styles.description, globalStyles.content]}>
           This application is a note-taking app built with React Native and
           Expo. It uses various open-source libraries, each with its own
           license. Here is a list of the licenses for the libraries used:
         </Text>
+        {/*Display the licenses */}
         {Object.entries(licenses).map(([packageName, packageInfo]) => (
           <View key={packageName} style={styles.packageContainer}>
             <Text style={[styles.packageName, globalStyles.label]}>

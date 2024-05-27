@@ -17,12 +17,14 @@ const AddNoteScreen = ({ navigation }) => {
   const { darkMode } = useTheme();
   const globalStyles = GlobalStyles();
 
+  //Check if note has empty value
   const handleAddNote = async () => {
     if (!title || !content) {
       Alert.alert("Note Error", "Title and content must not be empty");
       return;
     }
     try {
+      //Send POST request
       const token = await getToken();
       const response = await fetch(`${SERVER_URL}/api/notes`, {
         method: "POST",
@@ -42,12 +44,13 @@ const AddNoteScreen = ({ navigation }) => {
     }
   };
 
+  //Check darkmode and change color accordingly
   const placeholderColor = darkMode ? "#bbb" : "#888";
-  const buttonColor = darkMode ? "#bbb" : "#888";
 
   return (
     <View style={[styles.container, globalStyles.background]}>
       <ScrollView contentContainerStyle={styles.scrollContent}>
+        {/*Title input*/}
         <TextInput
           style={[styles.titleSpace, globalStyles.title]}
           value={title}
@@ -55,6 +58,7 @@ const AddNoteScreen = ({ navigation }) => {
           placeholder="Enter title"
           placeholderTextColor={placeholderColor}
         />
+        {/*Content input*/}
         <TextInput
           style={[styles.contentSpace, globalStyles.content]}
           value={content}
@@ -64,6 +68,7 @@ const AddNoteScreen = ({ navigation }) => {
           multiline
         />
       </ScrollView>
+      {/*Add note button*/}
       <View style={[styles.footer, globalStyles.background]}>
         <Button
           title="Add Note"
@@ -75,6 +80,7 @@ const AddNoteScreen = ({ navigation }) => {
   );
 };
 
+//Local style
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16 },
   scrollContent: { flexGrow: 1 },

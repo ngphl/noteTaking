@@ -1,6 +1,7 @@
 import { createContext, useState, useContext, useEffect } from "react";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
+//Theme to store and use persist settings
 const ThemeContext = createContext();
 
 export const useTheme = () => useContext(ThemeContext);
@@ -12,10 +13,12 @@ export function ThemeProvider({ children }) {
   useEffect(() => {
     const getTheme = async () => {
       try {
+        //Large text option
         const storedLargeText = await AsyncStorage.getItem("isLargeText");
         const parsedLargeText = storedLargeText ? JSON.parse(storedLargeText) : false;
         setIsLargeText(parsedLargeText);
 
+        //Dark mode option
         const storedDarkMode = await AsyncStorage.getItem("darkMode");
         const parsedDarkMode = storedDarkMode
           ? JSON.parse(storedDarkMode)

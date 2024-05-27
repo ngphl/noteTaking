@@ -5,6 +5,7 @@ import { useTheme } from "../components/theme";
 import { GlobalStyles } from "../components/style";
 import { GlobalLayout } from "../components/Layout";
 
+//Configuration screen
 const ConfigScreen = () => {
   const { isLargeText, setIsLargeText } = useTheme();
   const { darkMode, setDarkMode } = useTheme();
@@ -12,10 +13,12 @@ const ConfigScreen = () => {
 
   return (
     <GlobalLayout>
+      {/*Large Text option*/}
       <View style={styles.view}>
         <Switch
           value={isLargeText}
           onValueChange={async () => {
+            //Store large text option
             await AsyncStorage.setItem(
               "isLargeText",
               JSON.stringify(!isLargeText)
@@ -26,10 +29,12 @@ const ConfigScreen = () => {
         />
         <Text style={globalStyles.content}>Large Text</Text>
       </View>
+      {/*Darkmode option*/} 
       <View style={styles.view}>
         <Switch
           value={darkMode}
           onValueChange={async () => {
+            //Store dark mode setting
             await AsyncStorage.setItem("darkMode", JSON.stringify(!darkMode));
             setDarkMode(!darkMode);
           }}
@@ -41,6 +46,7 @@ const ConfigScreen = () => {
   );
 };
 
+//Local style
 const styles = StyleSheet.create({
   view: {
     flexDirection: "row",

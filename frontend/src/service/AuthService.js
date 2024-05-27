@@ -16,6 +16,7 @@ export const getToken = async () => {
 // Login service
 export const login = async (username, password) => {
   try {
+    // Fetch login
     const response = await fetch(`${SERVER_URL}/api/users/login`, {
       method: "POST",
       headers: {
@@ -27,10 +28,9 @@ export const login = async (username, password) => {
     if (!response.ok) {
       throw new Error("Invalid credentials");
     }
-
     const data = await response.json();
+    //Store token
     await AsyncStorage.setItem("token", data.token);
-
     return data;
   } catch (error) {
     throw new Error(error.message);
@@ -40,6 +40,7 @@ export const login = async (username, password) => {
 //Logout service
 export const logout = async () => {
     try{
+      //Remove token
         await  AsyncStorage.removeItem('token');
     }
     catch(error) {
@@ -50,6 +51,7 @@ export const logout = async () => {
 //Register service
 export const register = async (username, password) => {
   try {
+    //POST request with username and password
     const response = await fetch(`${SERVER_URL}/api/users/register`, {
       method: "POST",
       headers: {

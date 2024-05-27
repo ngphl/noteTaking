@@ -13,10 +13,12 @@ import { GlobalLayout } from "../components/Layout";
 import { GlobalStyles } from "../components/style";
 import moment from "moment";
 
+//Home screen
 const HomeScreen = ({ navigation }) => {
   const [notes, setNotes] = useState([]);
   const globalStyles = GlobalStyles();
 
+  //Fetch notes for user
   const fetchNotes = async () => {
     const token = await getToken();
     const response = await fetch(`${SERVER_URL}/api/notes`, {
@@ -29,6 +31,7 @@ const HomeScreen = ({ navigation }) => {
 
   };
 
+  // UseEffect and useFocusEffect to load and display notes
   useEffect(() => {
     fetchNotes();
   }, []);
@@ -41,6 +44,7 @@ const HomeScreen = ({ navigation }) => {
 
   return (
     <GlobalLayout>
+      {/*Page Headers & Add Note button*/}
       <View style={[styles.header, globalStyles.background]}>
         <Text style={globalStyles.title}>Note</Text>
         <TouchableOpacity
@@ -50,23 +54,28 @@ const HomeScreen = ({ navigation }) => {
           <Ionicons name="create-outline" size={30} style={globalStyles.icon} />
         </TouchableOpacity>
       </View>
+      {/*Display all notes using list*/}
       <View style={[styles.container, globalStyles.background]}>
         <FlatList
           data={notes}
           keyExtractor={(item) => item.id.toString()}
           renderItem={({ item }) => (
             <View style={styles.note}>
+              {/*Touchable Opacity allow view note in more detail page*/}
               <TouchableOpacity
                 onPress={() =>
                   navigation.navigate("NoteDetail", { noteId: item.id })
                 }
               >
+                {/*Note's date*/}
                 <Text style={[styles.date, globalStyles.date]}>
                   {moment(item.created_at).format("YYYY-MM-DD")}
                 </Text>
+                {/*Note's Title*/}
                 <Text style={[styles.titleSpace, globalStyles.title]}>
                   {item.title}
                 </Text>
+                {/*Note's Content*/}
                 <Text style={globalStyles.content}>{item.content}</Text>
               </TouchableOpacity>
             </View>
@@ -77,6 +86,7 @@ const HomeScreen = ({ navigation }) => {
   );
 };
 
+//Local styles
 const styles = StyleSheet.create({
   header: {
     flexDirection: "row",

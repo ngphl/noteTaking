@@ -12,6 +12,7 @@ import { getToken, SERVER_URL } from "../service/AuthService";
 import { GlobalStyles } from "../components/style";
 import moment from "moment";
 
+//Note detail screen
 const NoteDetailScreen = ({ route, navigation }) => {
   const { noteId } = route.params;
   const [note, setNote] = useState(null);
@@ -20,6 +21,7 @@ const NoteDetailScreen = ({ route, navigation }) => {
   const [isInitialFetch, setInitialFetch] = useState(true);
   const globalStyles = GlobalStyles();
 
+  //Fetch the specific note when user pressed from Home Screen
   useEffect(() => {
     const fetchNote = async () => {
       const token = await getToken();
@@ -33,12 +35,16 @@ const NoteDetailScreen = ({ route, navigation }) => {
       setNote(data);
       setTitle(data.title);
       setContent(data.content);
+      //Set initial fetch false as the note has been fetched
       setInitialFetch(false);
     };
     fetchNote();
   }, [noteId]);
 
+
+  //Update the notes into the database whenever title or content is changed
   useEffect(() => {
+    //If its first fetch then don't execeut
     if (isInitialFetch) return;
     const updateNote = async () => {
       try {
@@ -62,6 +68,7 @@ const NoteDetailScreen = ({ route, navigation }) => {
     return () => clearTimeout(timeoutId);
   }, [title, content]);
 
+  //Handle delete function
   const handleDelete = async () => {
     try {
       const token = await getToken();
@@ -82,6 +89,7 @@ const NoteDetailScreen = ({ route, navigation }) => {
     }
   };
 
+  // If there's no note loaded, display loading instead
   if (!note) {
     return (
       <View style={[styles.container, globalStyles.background]}>
@@ -93,15 +101,18 @@ const NoteDetailScreen = ({ route, navigation }) => {
   return (
     <View style={[styles.container, globalStyles.background]}>
       <ScrollView>
+        {/*Display date*/}
         <Text style={[styles.date, globalStyles.date]}>
           Created on: {moment(note.created_at).format("YYYY-MM-DD")}
         </Text>
+        {/*Display Title, if title is deleted there's placeholder*/}
         <TextInput
           style={[globalStyles.title, styles.titleSpace]}
           value={title}
           onChangeText={setTitle}
           placeholder="Enter title"
         />
+        {/*Display content, if content is deleted there's placeholder*/}
         <TextInput
           style={globalStyles.content}
           value={content}
@@ -110,6 +121,7 @@ const NoteDetailScreen = ({ route, navigation }) => {
           multiline
         />
       </ScrollView>
+      {/*Delete note button*/}
       <View style={[styles.footer, globalStyles.background]}>
         <Button title="Delete Note" onPress={handleDelete} color="#dd3439" />
       </View>
@@ -117,6 +129,7 @@ const NoteDetailScreen = ({ route, navigation }) => {
   );
 };
 
+//Local style
 const styles = StyleSheet.create({
   container: { flex: 1, padding: 16 },
   titleSpace: {

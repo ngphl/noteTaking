@@ -4,9 +4,11 @@ import { logout } from "../service/AuthService";
 import { GlobalLayout } from "../components/Layout";
 import { GlobalStyles } from "../components/style";
 
+//Setting screen consist of Configuration/AccountInformation/About and Logout
 const SettingScreen = ({ navigation }) => {
   const globalStyles = GlobalStyles();
 
+  //Handle Logout functionality
   const handleLogout = async () => {
     await logout();
     navigation.replace("Splash");
@@ -16,24 +18,28 @@ const SettingScreen = ({ navigation }) => {
     <GlobalLayout>
       <Text style={[globalStyles.title, styles.header]}>Setting</Text>
       <View style={globalStyles.background}>
+        {/*Configuration button*/}
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("Config")}
         >
           <Text style={styles.buttonText}>Configuration</Text>
         </TouchableOpacity>
+        {/*Account information button*/}
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("User")}
         >
           <Text style={styles.buttonText}>Account Information</Text>
         </TouchableOpacity>
+        {/*About screen button*/}
         <TouchableOpacity
           style={styles.button}
           onPress={() => navigation.navigate("About")}
         >
           <Text style={styles.buttonText}>About</Text>
         </TouchableOpacity>
+        {/*Logout button*/}
         <TouchableOpacity style={styles.button} onPress={handleLogout}>
           <Text style={styles.buttonText}>Logout</Text>
         </TouchableOpacity>
@@ -42,6 +48,7 @@ const SettingScreen = ({ navigation }) => {
   );
 };
 
+//Local style
 const styles = StyleSheet.create({
   header: {
     textAlign: "center",
