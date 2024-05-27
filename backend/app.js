@@ -4,9 +4,13 @@ var path = require("path");
 var cookieParser = require("cookie-parser");
 var morgan = require("morgan");
 const bodyParser = require("body-parser");
+const swaggerUI = require("swagger-ui-express");
+const swaggerDocument = require("./docs/openapi.json");
+
 
 const userRoutes = require("./routes/userRoutes");
 const noteRoutes = require("./routes/noteRoutes"); // Import note routes
+
 
 var indexRouter = require("./routes/index");
 var usersRouter = require("./routes/users");
@@ -21,6 +25,7 @@ app.use(bodyParser.json());
 app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "jade");
 
+
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
@@ -29,6 +34,7 @@ app.use(express.static(path.join(__dirname, "public")));
 // Routes
 app.use("/api/users", userRoutes);
 app.use("/api/notes", noteRoutes); // Use note routes
+app.use("/docs", swaggerUI.serve, swaggerUI.setup(swaggerDocument)); //Swagger
 
 app.use("/", indexRouter);
 app.use("/users", usersRouter);
