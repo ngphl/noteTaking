@@ -47,8 +47,8 @@ The application is divided into two main parts:
 
 1. Clone the repository and navigate to the backend directory:
     ```sh
-    git clone [<repository_url>](https://github.com/ngphl/noteTaking)
-    cd [<repository_name>](https://github.com/ngphl/noteTaking)/backend
+    git clone https://github.com/ngphl/noteTaking
+    cd https://github.com/ngphl/noteTaking/backend
     ```
 
 2. Install dependencies:
